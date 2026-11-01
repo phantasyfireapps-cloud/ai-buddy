@@ -24,3 +24,10 @@ describe("validation", () => {
     expect(readEnv({ VITE_SUPABASE_URL: "http://127.0.0.1:54321", VITE_SUPABASE_ANON_KEY: "x".repeat(30) }).ok).toBe(true);
   });
 });
+
+describe("env", () => {
+  it("resolves a relative Supabase URL against the current origin", () => {
+    const r = readEnv({ VITE_SUPABASE_URL: "/supabase", VITE_SUPABASE_ANON_KEY: "x".repeat(30) });
+    expect(r.ok && r.env.VITE_SUPABASE_URL).toBe(`${window.location.origin}/supabase`);
+  });
+});

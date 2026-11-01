@@ -16,6 +16,8 @@ export default defineConfig(() => ({
     host: host || false,
     hmr: host ? { protocol: "ws", host, port: 1421 } : undefined,
     watch: { ignored: ["**/src-tauri/**"] },
+    // Lets a browser on another machine reach local Supabase through the dev server (VITE_SUPABASE_URL=/supabase).
+    proxy: { "/supabase": { target: "http://127.0.0.1:54321", changeOrigin: true, ws: true, rewrite: (p: string) => p.replace(/^\/supabase/, "") } },
   },
   test: {
     projects: [

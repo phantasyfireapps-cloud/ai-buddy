@@ -149,3 +149,9 @@ cd services/api && pip install -r requirements-dev.txt && pytest
 4. Kiosk polish: optional auto-start into full screen, an idle/attract mode, and a screen-dimming schedule.
 5. Code signing + auto-update (Tauri updater) and crash reporting.
 6. Android build from the same codebase (`tauri android`), reusing the backend and accounts.
+
+## Notes
+
+- **Cross-compiling the installer from Linux:** Ubuntu's NSIS 3.08 lacks `Include/Win/RestartManager.nsh`, which Tauri's installer script needs. Copy it from the NSIS sources (`kichik/nsis`, `Include/Win/RestartManager.nsh`) into `/usr/share/nsis/Include/Win/`, then run `pnpm tauri build --runner cargo-xwin --target x86_64-pc-windows-msvc`. The installer is unsigned.
+- **The Supabase URL is baked in at build time.** An installer built against local Supabase only works on the machine running it. Build with your cloud project's `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` for a distributable installer.
+- **Remote browser testing:** setting `VITE_SUPABASE_URL=/supabase` makes the Vite dev server proxy Supabase, so a browser on another machine can use the local stack.
