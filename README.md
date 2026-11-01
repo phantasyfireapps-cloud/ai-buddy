@@ -82,6 +82,11 @@ Verification and password-reset codes appear in Mailpit.
    project's team members, about 2 emails an hour. Until the templates are set, verification emails contain a link only.
    Clicking it confirms the account, and the user then signs in. Password reset can't be finished
    from the app until the code template is set.
+   With Brevo (free, no domain needed): host `smtp-relay.brevo.com`, port 587, the SMTP login and
+   key from Brevo → SMTP & API. The sender email must be a **verified sender** in Brevo, otherwise
+   Brevo logs "Sent" then "Error: sender not valid". Also turn off Brevo → Security → Authorized IPs
+   → **SMTP keys** blocking, because Supabase sends from changing AWS addresses. Gmail senders may
+   land in spam; an authenticated custom domain fixes that.
 5. Create `apps/desktop/.env.production.local` from `.env.example` with the project URL and the
    **anon/publishable** key. Never use the service-role key in the app.
 
