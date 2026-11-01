@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "voices": [
+    { "id": "deep-warm", "label": "Deep and warm", "pitch": 0.6, "rate": 0.9, "preferredGender": "male" },
+    { "id": "calm-dramatic", "label": "Calm and dramatic", "pitch": 0.8, "rate": 0.85, "preferredGender": "any" },
+    { "id": "bright-energetic", "label": "Bright and energetic", "pitch": 1.2, "rate": 1.15, "preferredGender": "any" },
+    { "id": "crisp-formal", "label": "Crisp and formal", "pitch": 0.9, "rate": 0.95, "preferredGender": "male" },
+    { "id": "bold-lively", "label": "Bold and lively", "pitch": 1.05, "rate": 1.1, "preferredGender": "any" },
+    { "id": "soft-reassuring", "label": "Soft and reassuring", "pitch": 1.0, "rate": 0.85, "preferredGender": "female" }
+  ]
+}
