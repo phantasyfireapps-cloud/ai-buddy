@@ -4,8 +4,8 @@ import { AuthFlowError } from "../lib/auth";
 import { useApp } from "../state/AppContext";
 
 export function SignIn() {
-  const { go, services, afterSignIn, setPendingEmail, notice, avatar } = useApp();
-  const [email, setEmail] = useState("");
+  const { go, services, afterSignIn, setPendingEmail, pendingEmail, notice, avatar } = useApp();
+  const [email, setEmail] = useState(pendingEmail ?? "");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);

@@ -76,7 +76,12 @@ Verification and password-reset codes appear in Mailpit.
 3. **Auth → Email Templates:** paste `supabase/templates/confirmation.html`, `recovery.html` and
    `reauthentication.html` into the Confirm signup, Reset password and Reauthentication templates. The
    app uses 6-digit codes (`{{ .Token }}`) instead of links, so no deep-link handling is needed on tablets.
-4. Configure custom SMTP for production (Supabase's built-in mailer is heavily rate limited).
+   Set **Email OTP length** to 6 (Supabase's default is 8).
+4. **Configure custom SMTP first** (Auth → SMTP Settings). On the free tier Supabase won't let you edit
+   email templates while you're using its built-in mailer. The built-in mailer also only delivers to the
+   project's team members, about 2 emails an hour. Until the templates are set, verification emails contain a link only.
+   Clicking it confirms the account, and the user then signs in. Password reset can't be finished
+   from the app until the code template is set.
 5. Create `apps/desktop/.env.production.local` from `.env.example` with the project URL and the
    **anon/publishable** key. Never use the service-role key in the app.
 

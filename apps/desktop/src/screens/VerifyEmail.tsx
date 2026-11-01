@@ -46,6 +46,9 @@ export function VerifyEmail() {
       <Button type="button" variant="ghost" onClick={resend}>
         Send a new code
       </Button>
+      <Button type="button" variant="ghost" onClick={() => go("signIn")}>
+        Got a link instead? Click it, then sign in
+      </Button>
     </form>
   );
 }
