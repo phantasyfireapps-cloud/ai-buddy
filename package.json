@@ -1,0 +1,16 @@
+{
+  "name": "ai-buddy",
+  "private": true,
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "dev": "pnpm --filter ai-buddy-desktop tauri dev",
+    "dev:web": "pnpm --filter ai-buddy-desktop dev",
+    "build:windows": "pnpm --filter ai-buddy-desktop tauri build --target x86_64-pc-windows-msvc",
+    "typecheck": "pnpm --filter ai-buddy-desktop typecheck",
+    "test": "pnpm --filter ai-buddy-desktop test",
+    "test:integration": "pnpm --filter ai-buddy-desktop test:integration",
+    "db:start": "supabase start",
+    "db:reset": "supabase db reset",
+    "presets:sync": "node scripts/generate-catalogue-migration.mjs"
+  }
+}
