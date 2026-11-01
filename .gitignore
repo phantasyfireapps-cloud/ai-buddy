@@ -1,0 +1,12 @@
+node_modules/
+dist/
+target/
+.venv/
+__pycache__/
+*.local
+.env
+.env.*.local
+apps/desktop/src-tauri/gen/schemas/
+supabase/.branches
+supabase/.temp
+.DS_Store
