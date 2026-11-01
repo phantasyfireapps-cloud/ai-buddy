@@ -10,6 +10,7 @@ export function Settings() {
   const [full, setFull] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [feedbackAt, setFeedbackAt] = useState<"device" | "account">("device");
   const [panel, setPanel] = useState<"none" | "password" | "delete">("none");
   const [current, setCurrent] = useState("");
   const [next, setNext] = useState("");
@@ -22,7 +23,8 @@ export function Settings() {
     void isFullscreen().then(setFull);
   }, []);
 
-  const guard = async (fn: () => Promise<void>, success?: string) => {
+  const guard = async (fn: () => Promise<void>, success?: string, at: "device" | "account" = "device") => {
+    setFeedbackAt(at);
     setError(null);
     setMessage(null);
     setBusy(true);
@@ -36,11 +38,18 @@ export function Settings() {
     }
   };
 
+  // Shown next to the controls that triggered it so it's visible without scrolling.
+  const feedback = (
+    <>
+      <Notice message={message} />
+      <FormError message={error} />
+    </>
+  );
+
   return (
     <section className="panel wide settings">
       <PanelHeader title="Settings & privacy" onBack={() => go("home")} />
-      <Notice message={message} />
-      <FormError message={error} />
+      {feedbackAt === "device" && feedback}
 
       <h2>This device</h2>
       <label className="toggle">
@@ -103,7 +112,7 @@ export function Settings() {
               setCurrent("");
               setNext("");
               setPanel("none");
-            }, "Your password has been changed.")}
+            }, "Your password has been changed.", "account")}
           >
             Save new password
           </Button>
@@ -123,12 +132,13 @@ export function Settings() {
               await services.auth.confirmPassword(current);
               await services.auth.deleteAccount();
               await signOut().catch(() => undefined);
-            })}
+            }, undefined, "account")}
           >
             Permanently delete my account
           </Button>
         </div>
       )}
+      {feedbackAt === "account" && feedback}
     </section>
   );
 }
